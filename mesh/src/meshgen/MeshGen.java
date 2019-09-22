@@ -36,7 +36,7 @@ class MeshGen {
         // TODO:
         int height = 2;
         int radius = 1;
-        double step = Math.PI / divisions;
+        double step = 2 * Math.PI / divisions;
         if (divisions < 2) {
             throw new IllegalArgumentException("divisions for cylinder should be larger than 2");
         }
@@ -53,7 +53,7 @@ class MeshGen {
         //vertices 2-33
         for (int i = 0; i < divisions; i++) {
             outputMesh.positions.add((new Vector3((float) (radius * Math.sin(i * step)), height / 2, (float) (radius * Math.cos(i * step)))));
-            outputMesh.normals.add((new Vector3((float) Math.sin(i * step), 0.0f, (float) Math.sin(i * step))));
+            outputMesh.normals.add((new Vector3((float) Math.sin(i * step), 0.0f, (float) Math.cos(i * step))));
             outputMesh.uvs.add((new Vector2((float)(0.25 + 0.25 * Math.sin(i * step)), (float)(0.75 + 0.25 * Math.cos(i * step)))));
         }
         //add vertices on the bottom rim
@@ -68,7 +68,7 @@ class MeshGen {
             OBJFace triangle = new OBJFace(3, true, true);
             triangle.setVertex(0, 0, 0, 0);
             triangle.setVertex(1, i, i, 0);
-            triangle.setVertex(2, (i + 1) < divisions + 2 ? (i + 1) : 0, i + 1, 0);
+            triangle.setVertex(2, (i + 1) < divisions + 2 ? (i + 1) : 2, (i + 1) < divisions + 2 ? (i + 1) : 2, 0);
             outputMesh.faces.add(triangle);
         }
         //add shell triangles
@@ -76,12 +76,12 @@ class MeshGen {
             OBJFace triangleRec1 = new OBJFace(3, true, true);
             OBJFace triangleRec2 = new OBJFace(3, true, true);
             triangleRec1.setVertex(0, i, i, i);
-            triangleRec1.setVertex(1, i+1, i+1, i+1);
+            triangleRec1.setVertex(1, (i+1) < divisions + 2 ? (i+1):2, (i+1) < divisions + 2 ? (i+1):2, (i+1) < divisions + 2 ? (i+1):2);
             triangleRec1.setVertex(2, i + 32, i + 32, i);
             outputMesh.faces.add(triangleRec1);
-            triangleRec2.setVertex(0, i, i, i);
-            triangleRec2.setVertex(1, i + 1, i + 1, i + 1);
-            triangleRec2.setVertex(2, i + 33, i + 33, i + 1);
+            triangleRec2.setVertex(0, i + 32, i + 32, i);
+            triangleRec2.setVertex(1, (i+1) < divisions + 2 ? (i+1):2, (i+1) < divisions + 2 ? (i+1):2, (i+1) < divisions + 2 ? (i+1):2);
+            triangleRec2.setVertex(2, (i+1) < divisions + 2 ? (i+33):34, (i+1) < divisions + 2 ? (i+33):34, (i+1) < divisions + 2 ? (i+1):0);
             outputMesh.faces.add(triangleRec2);
         }
         //add bottom triangles
@@ -89,7 +89,7 @@ class MeshGen {
             OBJFace triangle = new OBJFace(3, true, true);
             triangle.setVertex(0, 1, 1, 1);
             triangle.setVertex(1, i + 32, i + 32, 1);
-            triangle.setVertex(2, i + 33, i + 33, 1);
+            triangle.setVertex(2, (i+1) < divisions + 2 ? (i+33):34, (i+1) < divisions + 2 ? (i+33):34, 1);
             outputMesh.faces.add(triangle);
         }
         return outputMesh;
