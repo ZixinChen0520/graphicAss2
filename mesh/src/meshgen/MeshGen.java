@@ -41,20 +41,30 @@ class MeshGen {
             throw new IllegalArgumentException("divisions for cylinder should be larger than 2");
         }
         // Calculate Vertices (positions, uvs, and normals )
-        //add top vertex
-        outputMesh.positions.add((new Vector3(0.0f, 0.5f, 0.0f)));
+        //add top vertex and top normal
+        outputMesh.positions.add((new Vector3(0.0f, height/2, 0.0f)));
+        outputMesh.positions.add((new Vector3(0.0f, 1.0f, 0.0f)));
         //add bottom vertex
-        outputMesh.positions.add((new Vector3(0.0f, 0.5f, 0.0f)));
-        //add vertices on the top rim
+        outputMesh.normals.add((new Vector3(0.0f, -height/2, 0.0f)));
+        outputMesh.normals.add((new Vector3(0.0f, -1.0f, 0.0f)));
+        //add vertices on the top rim and add the horizontal normal by the way
         for (int i = 0; i < divisions; i++) {
-            outputMesh.positions.add((new Vector3((float) Math.sin(i * step), 0.5f, (float) Math.cos(i * step))));
+            outputMesh.positions.add((new Vector3((float) (radius * Math.sin(i * step)), height/2, (float) (radius * Math.cos(i * step)))));
+            outputMesh.normals.add((new Vector3((float) Math.sin(i * step), 0.0f, (float) Math.sin(i * step))));
         }
         //add vertices on the bottom rim
         for (int i = 0; i < divisions; i++) {
-            outputMesh.positions.add((new Vector3((float) Math.sin(i * step), -0.5f, (float) Math.cos(i * step))));
+            outputMesh.positions.add((new Vector3((float) Math.sin(i * step), -height/2, (float) Math.cos(i * step))));
         }
         // Calculate indices in faces (use OBJFace class)
-
+        //add top triangles
+        for (int i=0; i< divisions; i++) {
+            OBJFace triangle = new OBJFace(3, true, true);
+            triangle.setVertex(0, 0, 0, 0);
+            triangle.setVertex(1, i, i, i);
+            triangle.setVertex(2, i+1, i+1, i+1);
+            outputMesh.faces.add(triangle);
+        }
         return outputMesh;
     }
 
