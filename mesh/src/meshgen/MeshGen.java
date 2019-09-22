@@ -81,7 +81,7 @@ class MeshGen {
             outputMesh.faces.add(triangleRec1);
             triangleRec2.setVertex(0, i + 32, i + 32, i);
             triangleRec2.setVertex(1, (i+1) < divisions + 2 ? (i+1):2, (i+1) < divisions + 2 ? (i+1):2, (i+1) < divisions + 2 ? (i+1):2);
-            triangleRec2.setVertex(2, (i+1) < divisions + 2 ? (i+33):34, (i+1) < divisions + 2 ? (i+33):34, (i+1) < divisions + 2 ? (i+1):0);
+            triangleRec2.setVertex(2, (i+1) < divisions + 2 ? (i+33):34, (i+1) < divisions + 2 ? (i+33):34, (i+1) < divisions + 2 ? (i+1):2);
             outputMesh.faces.add(triangleRec2);
         }
         //add bottom triangles
