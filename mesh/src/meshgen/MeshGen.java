@@ -42,27 +42,50 @@ class MeshGen {
         }
         // Calculate Vertices (positions, uvs, and normals )
         //add top vertex and top normal
-        outputMesh.positions.add((new Vector3(0.0f, height/2, 0.0f)));
+        outputMesh.positions.add((new Vector3(0.0f, height / 2, 0.0f)));     //vertex 0
         outputMesh.positions.add((new Vector3(0.0f, 1.0f, 0.0f)));
         //add bottom vertex
-        outputMesh.normals.add((new Vector3(0.0f, -height/2, 0.0f)));
+        outputMesh.normals.add((new Vector3(0.0f, -height / 2, 0.0f)));      //vertex 1
         outputMesh.normals.add((new Vector3(0.0f, -1.0f, 0.0f)));
         //add vertices on the top rim and add the horizontal normal by the way
+        //vertices 2-33
         for (int i = 0; i < divisions; i++) {
-            outputMesh.positions.add((new Vector3((float) (radius * Math.sin(i * step)), height/2, (float) (radius * Math.cos(i * step)))));
+            outputMesh.positions.add((new Vector3((float) (radius * Math.sin(i * step)), height / 2, (float) (radius * Math.cos(i * step)))));
             outputMesh.normals.add((new Vector3((float) Math.sin(i * step), 0.0f, (float) Math.sin(i * step))));
         }
         //add vertices on the bottom rim
+        //vertices 34-65
         for (int i = 0; i < divisions; i++) {
-            outputMesh.positions.add((new Vector3((float) Math.sin(i * step), -height/2, (float) Math.cos(i * step))));
+            outputMesh.positions.add((new Vector3((float) Math.sin(i * step), -height / 2, (float) Math.cos(i * step))));
         }
         // Calculate indices in faces (use OBJFace class)
         //add top triangles
-        for (int i=0; i< divisions; i++) {
+        for (int i = 2; i < divisions + 2; i++) {
             OBJFace triangle = new OBJFace(3, true, true);
             triangle.setVertex(0, 0, 0, 0);
-            triangle.setVertex(1, i, i, i);
-            triangle.setVertex(2, i+1, i+1, i+1);
+            triangle.setVertex(1, i, i, 0);
+            triangle.setVertex(2, (i + 1) < divisions + 2 ? (i + 1) : 0, i + 1, 0);
+            outputMesh.faces.add(triangle);
+        }
+        //add shell triangles
+        for (int i = 2; i< divisions + 2; i++) {
+            OBJFace triangleRec1 = new OBJFace(3, true, true);
+            OBJFace triangleRec2 = new OBJFace(3, true, true);
+            triangleRec1.setVertex(0, i, 0, i);
+            triangleRec1.setVertex(1, i+1, 0, i+1);
+            triangleRec1.setVertex(2, i + 32, 0, i);
+            outputMesh.faces.add(triangleRec1);
+            triangleRec2.setVertex(0, i, 0, i);
+            triangleRec2.setVertex(1, i + 1, 0, i + 1);
+            triangleRec2.setVertex(2, i + 33, 0, i + 1);
+            outputMesh.faces.add(triangleRec2);
+        }
+        //add bottom triangles
+        for (int i = 2; i<divisions + 2; i++) {
+            OBJFace triangle = new OBJFace(3, true, true);
+            triangle.setVertex(0, 1, 0, 1);
+            triangle.setVertex(1, i + 32, 0, 1);
+            triangle.setVertex(2, i + 33, 0, 1);
             outputMesh.faces.add(triangle);
         }
         return outputMesh;
