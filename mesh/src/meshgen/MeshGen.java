@@ -33,65 +33,82 @@ class MeshGen {
         OBJMesh outputMesh = new OBJMesh();
 
         // Task1: Generate Cylinder (20pt)
-        // TODO:
+
         int height = 2;
         int radius = 1;
+        int topBottomTextureRotationFactor = 4;
         double step = 2 * Math.PI / divisions;
+        float textureStep = 1.0f / (float) divisions;
         if (divisions < 2) {
             throw new IllegalArgumentException("divisions for cylinder should be larger than 2");
         }
-        // Calculate Vertices (positions, uvs, and normals )
-        //add top vertex and top normal
-        outputMesh.positions.add((new Vector3(0.0f, height / 2, 0.0f)));     //vertex 0
-        outputMesh.normals.add((new Vector3(0.0f, 1.0f, 0.0f)));
-        outputMesh.uvs.add(new Vector2(0.25f, 0.75f));
-        //add bottom vertex
-        outputMesh.positions.add((new Vector3(0.0f, -height / 2, 0.0f)));      //vertex 1
-        outputMesh.normals.add((new Vector3(0.0f, -1.0f, 0.0f)));
-        outputMesh.uvs.add(new Vector2(0.75f, 0.75f));
-        //add vertices on the top rim and add the horizontal normal by the way
-        //vertices 2-33
-        for (int i = 0; i < divisions; i++) {
-            outputMesh.positions.add((new Vector3((float) (radius * Math.sin(i * step)), height / 2, (float) (radius * Math.cos(i * step)))));
-            outputMesh.normals.add((new Vector3((float) Math.sin(i * step), 0.0f, (float) Math.cos(i * step))));
-            outputMesh.uvs.add((new Vector2((float)(0.25 + 0.25 * Math.sin(i * step)), (float)(0.75 + 0.25 * Math.cos(i * step)))));
+        // Top center position
+        outputMesh.positions.add((new Vector3(0.0f, height/2, 0.0f))); // 0
+        // Bottom center position
+        outputMesh.positions.add((new Vector3(0.0f, -height/2, 0.0f))); // 1
+        // Up and down normals
+        outputMesh.normals.add((new Vector3(0,1,0))); // 0
+        outputMesh.normals.add((new Vector3(0,-1,0))); // 1
+
+        // Top surface
+        for (int i = 0; i < divisions; i++ ) {
+            outputMesh.positions.add((new Vector3((float) Math.cos(i * step), height / 2, (float) Math.sin(i * step))));
+            outputMesh.normals.add((new Vector3((float) Math.cos(i * step), 0, (float)Math.sin(i * step))));
+            outputMesh.uvs.add((new Vector2(i*textureStep, 0.0f)));
         }
-        //add vertices on the bottom rim
-        //vertices 34-65
-        for (int i = 0; i < divisions; i++) {
-            outputMesh.positions.add((new Vector3((float) Math.sin(i * step), -height / 2, (float) Math.cos(i * step))));
-            outputMesh.uvs.add((new Vector2((float)(0.75 + 0.25 * Math.sin(i * step)), (float)(0.75 + 0.25 * Math.cos(i * step)))));
+        outputMesh.uvs.add((new Vector2(1.0f, 0.0f)));
+        // Bottom surface
+        for (int i = 0; i < divisions; i++ ) {
+            outputMesh.positions.add((new Vector3((float) Math.cos(i * step), -height / 2, (float) Math.sin(i * step))));
+            outputMesh.uvs.add((new Vector2(i*textureStep, 0.5f)));
         }
-        // Calculate indices in faces (use OBJFace class)
-        //add top triangles
-        for (int i = 2; i < divisions + 2; i++) {
+        outputMesh.uvs.add((new Vector2(1.0f, 0.5f)));
+
+        // Top & Bottom texture
+        for (int i = 0; i < divisions; i++ ) {
+            outputMesh.uvs.add((new Vector2((float) Math.cos(-i * step) * 0.25f + 0.75f, (float) Math.sin(-i * step) * 0.25f + 0.75f)));
+        }
+        for (int i = 0; i < divisions; i++ ) {
+            outputMesh.uvs.add((new Vector2((float) Math.cos(-i * step) * 0.25f + 0.25f, (float) Math.sin(-i * step) * 0.25f + 0.75f)));
+        }
+        outputMesh.uvs.add((new Vector2(0.75f, 0.75f)));
+        outputMesh.uvs.add((new Vector2(0.25f, 0.75f)));
+
+        // Top faces
+        for (int i = 2; i < divisions + 2; i++){
             OBJFace triangle = new OBJFace(3, true, true);
-            triangle.setVertex(0, 0, 0, 0);
-            triangle.setVertex(1, i, i, 0);
-            triangle.setVertex(2, (i + 1) < divisions + 2 ? (i + 1) : 2, (i + 1) < divisions + 2 ? (i + 1) : 2, 0);
+            triangle.setVertex(0, 0, 4*divisions + 2, 0);
+            triangle.setVertex(1, (i + 1) < divisions + 2 ? (i + 1) : 2, (2*divisions + 2) + (i - 1) < 3*divisions + 2 ? (2*divisions + 2) + (i - 1) : 2*divisions + 2, 0);
+            triangle.setVertex(2, i, (2*divisions + 2) + (i - 2), 0);
             outputMesh.faces.add(triangle);
         }
-        //add shell triangles
-        for (int i = 2; i< divisions + 2; i++) {
-            OBJFace triangleRec1 = new OBJFace(3, true, true);
-            OBJFace triangleRec2 = new OBJFace(3, true, true);
-            triangleRec1.setVertex(0, i, i, i);
-            triangleRec1.setVertex(1, (i+1) < divisions + 2 ? (i+1):2, (i+1) < divisions + 2 ? (i+1):2, (i+1) < divisions + 2 ? (i+1):2);
-            triangleRec1.setVertex(2, i + 32, i + 32, i);
-            outputMesh.faces.add(triangleRec1);
-            triangleRec2.setVertex(0, i + 32, i + 32, i);
-            triangleRec2.setVertex(1, (i+1) < divisions + 2 ? (i+1):2, (i+1) < divisions + 2 ? (i+1):2, (i+1) < divisions + 2 ? (i+1):2);
-            triangleRec2.setVertex(2, (i+1) < divisions + 2 ? (i+33):34, (i+1) < divisions + 2 ? (i+33):34, (i+1) < divisions + 2 ? (i+1):2);
-            outputMesh.faces.add(triangleRec2);
-        }
-        //add bottom triangles
-        for (int i = 2; i<divisions + 2; i++) {
+        // Bottom faces
+        for (int i = 2 + divisions; i < 2*divisions + 2; i++){
             OBJFace triangle = new OBJFace(3, true, true);
-            triangle.setVertex(0, 1, 1, 1);
-            triangle.setVertex(1, i + 32, i + 32, 1);
-            triangle.setVertex(2, (i+1) < divisions + 2 ? (i+33):34, (i+1) < divisions + 2 ? (i+33):34, 1);
+            triangle.setVertex(0, 1, 4*divisions + 3, 1);
+            triangle.setVertex(1, i, (2*divisions + 2) + (i - 2), 1);
+            triangle.setVertex(2, (i + 1) < 2*divisions + 2 ? (i + 1) : 2 + divisions, (2*divisions + 2) + (i - 1) < 4*divisions + 2 ? (2*divisions + 2) + (i - 1) : 3*divisions + 2, 1);
             outputMesh.faces.add(triangle);
         }
+        // Side faces
+        for (int i = 2; i < divisions + 2; i++){
+            var positionIndex1 = (i + divisions + 1) < 2 * divisions + 2 ? (i + divisions + 1) : 2 + divisions;
+            var positionIndex2 = (i + 1) < divisions + 2 ? (i + 1) : 2;
+
+            OBJFace triangle1 = new OBJFace(3, true, true);
+            triangle1.setVertex(0, i, (2 * divisions + 1) - (i - 2), i);
+            triangle1.setVertex(1, positionIndex1, (divisions - 1) - (i - 2), positionIndex2);
+            triangle1.setVertex(2, i + divisions, divisions - (i - 2), i);
+            outputMesh.faces.add(triangle1);
+
+            OBJFace triangle2 = new OBJFace(3, true, true);
+            triangle2.setVertex(0, i, (2 * divisions + 1) - (i - 2), i);
+            triangle2.setVertex(1, positionIndex2, (2 * divisions) - (i - 2), positionIndex2);
+            triangle2.setVertex(2, positionIndex1, (divisions - 1) - (i - 2), positionIndex2);
+            outputMesh.faces.add(triangle2);
+        }
+
+
         return outputMesh;
     }
 
