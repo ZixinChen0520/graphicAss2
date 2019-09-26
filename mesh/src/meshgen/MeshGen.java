@@ -34,9 +34,9 @@ class MeshGen {
 
         // Task1: Generate Cylinder (20pt)
 
-        int height = 2;
-        int radius = 1;
-        int topBottomTextureRotationFactor = 4;
+        float height = 2.0f;
+        float radius = 1.0f;
+        int topBottomTextureRotationFactor = - 5;
         double step = 2 * Math.PI / divisions;
         float textureStep = 1.0f / (float) divisions;
         if (divisions < 2) {
@@ -52,23 +52,25 @@ class MeshGen {
 
         // Top surface
         for (int i = 0; i < divisions; i++ ) {
-            outputMesh.positions.add((new Vector3((float) Math.cos(i * step), height / 2, (float) Math.sin(i * step))));
+            outputMesh.positions.add((new Vector3(radius * (float) Math.cos(i * step), height / 2, radius * (float) Math.sin(i * step))));
             outputMesh.normals.add((new Vector3((float) Math.cos(i * step), 0, (float)Math.sin(i * step))));
             outputMesh.uvs.add((new Vector2(i*textureStep, 0.0f)));
         }
         outputMesh.uvs.add((new Vector2(1.0f, 0.0f)));
         // Bottom surface
         for (int i = 0; i < divisions; i++ ) {
-            outputMesh.positions.add((new Vector3((float) Math.cos(i * step), -height / 2, (float) Math.sin(i * step))));
+            outputMesh.positions.add((new Vector3(radius * (float) Math.cos(i * step), -height / 2, radius * (float) Math.sin(i * step))));
             outputMesh.uvs.add((new Vector2(i*textureStep, 0.5f)));
         }
         outputMesh.uvs.add((new Vector2(1.0f, 0.5f)));
 
         // Top & Bottom texture
-        for (int i = 0; i < divisions; i++ ) {
+        for (int j = 0; j < divisions; j++ ) {
+            int i = (j + topBottomTextureRotationFactor) < divisions ? (j + topBottomTextureRotationFactor) : (j + topBottomTextureRotationFactor) - divisions;
             outputMesh.uvs.add((new Vector2((float) Math.cos(-i * step) * 0.25f + 0.75f, (float) Math.sin(-i * step) * 0.25f + 0.75f)));
         }
-        for (int i = 0; i < divisions; i++ ) {
+        for (int j = 0; j < divisions; j++ ) {
+            int i = (j + topBottomTextureRotationFactor) < divisions ? (j + topBottomTextureRotationFactor) : (j + topBottomTextureRotationFactor) - divisions;
             outputMesh.uvs.add((new Vector2((float) Math.cos(-i * step) * 0.25f + 0.25f, (float) Math.sin(-i * step) * 0.25f + 0.75f)));
         }
         outputMesh.uvs.add((new Vector2(0.75f, 0.75f)));

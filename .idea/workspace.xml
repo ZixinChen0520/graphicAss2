@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5476166e-a01a-4569-bba9-ac44106af6be" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/git" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mesh/src/meshgen/MeshGen.java" beforeDir="false" afterPath="$PROJECT_DIR$/mesh/src/meshgen/MeshGen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/mesh/math/Vector2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/math/Vector2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/mesh/math/Vector3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/math/Vector3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/mesh/meshgen/MeshGen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/meshgen/MeshGen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJFace.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJFace.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJMesh$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJMesh$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJMesh$CompareFacesResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJMesh$CompareFacesResult.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJMesh$OBJFileFormatException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJMesh$OBJFileFormatException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJMesh.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJMesh.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/outfile.obj" beforeDir="false" afterPath="$PROJECT_DIR$/outfile.obj" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,7 +39,11 @@
     </option>
   </component>
   <component name="ProjectId" id="1RMJ4nBetrJWiiIJCboDk9Mt39a" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Original" />
     <property name="project.structure.last.edited" value="Project" />
@@ -122,5 +118,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
