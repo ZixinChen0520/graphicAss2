@@ -111,9 +111,51 @@ class MeshGen {
 
         // Task1: Generate Sphere (20pt)
         // TODO:
+        double radius = 1.0;
+        double equatorStep = 2 * Math.PI / divisionsU;
+        double poleStep = Math.PI / divisionsV;
+        //add top vertex as 0
+        outputMesh.positions.add((new Vector3(0.0f, 1.0f, 0.0f)));
+        outputMesh.normals.add((new Vector3(0.0f, 1.0f, 0.0f)));
+        outputMesh.uvs.add((new Vector2(0.0f, 0.0f)));
+        int count = 0;
         // Calculate Vertices (positions, uvs, and normals )
+        for (int i = 1; i < divisionsV; i++) {
+            double phi = poleStep * i;
+            for (int j = 0; j < divisionsU; j++) {
+                count++;
+                outputMesh.positions.add((new Vector3(
+                        (float)(radius * Math.sin(phi) * Math.cos(j * equatorStep)),
+                        (float)(radius * Math.cos(phi)),
+                        (float)(radius * Math.sin(phi) * Math.sin(j * equatorStep))
+                )));
+                outputMesh.normals.add((new Vector3(
+                        (float)(radius * Math.sin(phi) * Math.cos(j * equatorStep)),
+                        (float)(radius * Math.cos(phi)),
+                        (float)(radius * Math.sin(phi) * Math.sin(j * equatorStep))
+                )));
+                outputMesh.uvs.add((new Vector2(0.0f, 0.0f)));
+            }
+        }
+        outputMesh.positions.add(((new Vector3(0.0f, -1.0f, 0.0f))));
+        outputMesh.normals.add((new Vector3(0.0f, -1.0f, 0.0f)));
+        outputMesh.uvs.add((new Vector2(0.0f, 0.0f)));
         // Calculate indices in faces (use OBJFace class)
-
+        for (int i = 0; i< divisionsV - 1; i++) {
+            for (int j = 1; j < divisionsU + 1; j++) {
+                //draw up triangle
+                OBJFace triangle = new OBJFace(3, true, true);
+                triangle.setVertex(0, j + i * divisionsU, j+ i * divisionsU, j + i * divisionsU);
+                triangle.setVertex(1, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1);
+                triangle.setVertex(2, Math.max(0, j + (i - 1) * divisionsU), Math.max(0, j + (i - 1) * divisionsU), Math.max(0, j + (i - 1) * divisionsU));
+                outputMesh.faces.add(triangle);
+                OBJFace triangleDown = new OBJFace(3, true, true);
+                triangleDown.setVertex(0, j + i * divisionsU, j+ i * divisionsU, j + i * divisionsU);
+                triangleDown.setVertex(2, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1);
+                triangleDown.setVertex(1, Math.min((divisionsV-1) * divisionsU + 1, j + 1 + (i + 1) * divisionsU),  Math.min((divisionsV-1) * divisionsU + 1, j + 1 + (i + 1) * divisionsU),  Math.min((divisionsV-1) * divisionsU + 1, j + 1 + (i + 1) * divisionsU));
+                outputMesh.faces.add(triangleDown);
+            }
+        }
         return outputMesh;
     }
 
