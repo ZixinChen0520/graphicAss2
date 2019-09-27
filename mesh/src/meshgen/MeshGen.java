@@ -185,6 +185,12 @@ class MeshGen {
         for (Vector3 vec : inputMesh.positions) {
             outputMesh.normals.add((new Vector3(0.f, 0.f, 0.f)));
         }
+        for (OBJFace face : inputMesh.faces) {
+            Vector3 a = outputMesh.positions.get(face.positions[0]);
+            Vector3 b = outputMesh.positions.get(face.positions[0]);
+            Vector3 c = outputMesh.positions.get(face.positions[0]);
+            Vector3 line1 = a.sub(b);
+        }
         // Initialize output faces
         // Calculate face normals, distribute to adjacent vertices
         // Normalize new normals
