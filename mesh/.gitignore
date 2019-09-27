@@ -1,4 +1,3 @@
-/bin/
-out/production/mesh/meshgen/MeshGen.class
-outfile.obj
-.idea/workspace.xml
+*.class
+*.obj
+*.xml
