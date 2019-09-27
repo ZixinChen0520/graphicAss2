@@ -1,6 +1,7 @@
 package meshgen;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import math.Vector2;
 import math.Vector3;
@@ -186,14 +187,27 @@ class MeshGen {
             outputMesh.normals.add((new Vector3(0.f, 0.f, 0.f)));
         }
         for (OBJFace face : inputMesh.faces) {
-            Vector3 a = outputMesh.positions.get(face.positions[0]);
-            Vector3 b = outputMesh.positions.get(face.positions[0]);
-            Vector3 c = outputMesh.positions.get(face.positions[0]);
-            Vector3 line1 = a.sub(b);
+            outputMesh.faces.add(face);
+            Vector3 a = outputMesh.positions.get(face.positions[0]).clone();
+            Vector3 b = outputMesh.positions.get(face.positions[1]).clone();
+            Vector3 c = outputMesh.positions.get(face.positions[2]).clone();
+            Vector3 line1 = a.clone().sub(b.clone());
+            Vector3 line2 = a.clone().sub(c.clone());
+            Vector3 direction = line1.cross(line2).normalize();
+            outputMesh.normals.set(face.positions[0],outputMesh.normals.get(face.positions[0]).clone().add(direction.clone()));
+            outputMesh.normals.set(face.positions[1],outputMesh.normals.get(face.positions[1]).clone().add(direction.clone()));
+            outputMesh.normals.set(face.positions[2],outputMesh.normals.get(face.positions[2]).clone().add(direction.clone()));
+        }
+        for (int i = 0; i < outputMesh.normals.size(); i++) {
+            Vector3 tempNorm = outputMesh.normals.get(i).clone();
+            outputMesh.normals.set(i, tempNorm.normalize().clone());
         }
         // Initialize output faces
         // Calculate face normals, distribute to adjacent vertices
         // Normalize new normals
+        for (OBJFace face: outputMesh.faces) {
+            face.normals = face.positions.clone();
+        }
 
         return outputMesh;
     }
