@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5476166e-a01a-4569-bba9-ac44106af6be" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mesh/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/mesh/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mesh/src/meshgen/MeshGen.java" beforeDir="false" afterPath="$PROJECT_DIR$/mesh/src/meshgen/MeshGen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/mesh/meshgen/MeshGen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/meshgen/MeshGen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/outfile.obj" beforeDir="false" afterPath="$PROJECT_DIR$/outfile.obj" afterDir="false" />
-    </list>
+    <list default="true" id="5476166e-a01a-4569-bba9-ac44106af6be" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,5 +86,8 @@
       <updated>1569182684786</updated>
     </task>
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
