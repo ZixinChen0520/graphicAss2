@@ -165,13 +165,13 @@ class MeshGen {
                 //draw up triangle
                 OBJFace triangle = new OBJFace(3, true, true);
                 triangle.setVertex(0, j + i * divisionsU, j+ i * divisionsU, j + i * divisionsU);
-                triangle.setVertex(1, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1);
-                triangle.setVertex(2, Math.max(0, j + (i - 1) * divisionsU), Math.max(0, j + (i - 1) * divisionsU), Math.max(0, j + (i - 1) * divisionsU));
+                triangle.setVertex(2, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1);
+                triangle.setVertex(1, Math.max(0, j + (i - 1) * divisionsU), Math.max(0, j + (i - 1) * divisionsU), Math.max(0, j + (i - 1) * divisionsU));
                 outputMesh.faces.add(triangle);
                 OBJFace triangleDown = new OBJFace(3, true, true);
                 triangleDown.setVertex(0, j + i * divisionsU, j+ i * divisionsU, j + i * divisionsU);
-                triangleDown.setVertex(2, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1);
-                triangleDown.setVertex(1, Math.min((divisionsV-1) * divisionsU + 1, j + 1 + (i + 1) * divisionsU),  Math.min((divisionsV-1) * divisionsU + 1, j + 1 + (i + 1) * divisionsU),  Math.min((divisionsV-1) * divisionsU + 1, j + 1 + (i + 1) * divisionsU));
+                triangleDown.setVertex(1, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1, j == divisionsU ? (i * divisionsU + 1) : j+ i * divisionsU + 1);
+                triangleDown.setVertex(2, Math.min((divisionsV-1) * divisionsU + 1, j + 1 + (i + 1) * divisionsU),  Math.min((divisionsV-1) * divisionsU + 1, j + 1 + (i + 1) * divisionsU),  Math.min((divisionsV-1) * divisionsU + 1, j + 1 + (i + 1) * divisionsU));
                 outputMesh.faces.add(triangleDown);
             }
         }
