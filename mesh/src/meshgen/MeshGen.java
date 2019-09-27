@@ -174,8 +174,17 @@ class MeshGen {
         // Task2: Compute Normals (35pt)
         // TODO:
         // Copy position data
+        for (Vector3 vec : inputMesh.positions) {
+            outputMesh.positions.add(vec.clone());
+        }
         // Copy UV data
+        for (Vector2 vec : inputMesh.uvs) {
+            outputMesh.uvs.add(vec.clone());
+        }
         // Each vertex gets a unique normal
+        for (Vector3 vec : inputMesh.positions) {
+            outputMesh.normals.add((new Vector3(0.f, 0.f, 0.f)));
+        }
         // Initialize output faces
         // Calculate face normals, distribute to adjacent vertices
         // Normalize new normals
