@@ -2,10 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5476166e-a01a-4569-bba9-ac44106af6be" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/sphere_out.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torus_out.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cylinder_out.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cylinder_out.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mesh/src/meshgen/MeshGen.java" beforeDir="false" afterPath="$PROJECT_DIR$/mesh/src/meshgen/MeshGen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mesh/math/Vector2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/math/Vector2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mesh/math/Vector3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/math/Vector3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/mesh/meshgen/MeshGen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/meshgen/MeshGen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJFace.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJFace.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJMesh$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJMesh$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJMesh$CompareFacesResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJMesh$CompareFacesResult.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJMesh$OBJFileFormatException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJMesh$OBJFileFormatException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJMesh.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/meshgen/OBJMesh.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +31,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>main</find>
+      <find>13</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -37,14 +47,17 @@
       </list>
     </option>
   </component>
-  <component name="ProjectId" id="1RQzqSTcDs0XqV8fOwtJJ5rZ1N9" />
+  <component name="ProjectId" id="1RRd81YHB9zSqPxVbPI7edT4F26" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -59,10 +72,12 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration type="Application" factoryName="Application" temporary="true">
+    <configuration name="MeshGen" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="13" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="meshgen.MeshGen" />
       <module name="mesh" />
-      <option name="PROGRAM_PARAMETERS" value="-c ./mesh/data/cylinder-reference.obj cylinder_out.obj " />
+      <option name="PROGRAM_PARAMETERS" value="-g torus -n 32 -m 16 -r 0.5 -o torus_out.obj" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="meshgen.*" />
@@ -82,7 +97,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application." />
+        <item itemvalue="Application.MeshGen" />
       </list>
     </recent_temporary>
   </component>
@@ -98,6 +113,15 @@
       <updated>1569182684786</updated>
     </task>
     <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

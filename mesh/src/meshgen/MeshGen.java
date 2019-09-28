@@ -69,11 +69,11 @@ class MeshGen {
         // Top & Bottom texture
         for (int j = 0; j < divisions; j++) {
             int i = (j + topBottomTextureRotationFactor) < divisions ? (j + topBottomTextureRotationFactor) : (j + topBottomTextureRotationFactor) - divisions;
-            outputMesh.uvs.add((new Vector2((float) Math.cos(-i * step) * 0.25f + 0.75f, (float) Math.sin(-i * step) * 0.25f + 0.75f)));
+            outputMesh.uvs.add((new Vector2((float) Math.cos(i * step + phase) * 0.25f + 0.75f, (float) -Math.sin(i * step + phase) * 0.25f + 0.75f)));
         }
         for (int j = 0; j < divisions; j++) {
             int i = (j + topBottomTextureRotationFactor) < divisions ? (j + topBottomTextureRotationFactor) : (j + topBottomTextureRotationFactor) - divisions;
-            outputMesh.uvs.add((new Vector2((float) Math.cos(-i * step) * 0.25f + 0.25f, (float) Math.sin(-i * step) * 0.25f + 0.75f)));
+            outputMesh.uvs.add((new Vector2((float) -Math.cos(i * step - phase) * 0.25f + 0.25f, (float) -Math.sin(i * step - phase) * 0.25f + 0.75f)));
         }
         outputMesh.uvs.add((new Vector2(0.75f, 0.75f)));
         outputMesh.uvs.add((new Vector2(0.25f, 0.75f)));
@@ -269,30 +269,65 @@ class MeshGen {
         // Extra Credit: Generate Turos (10pt)
         // TODO:
         float majorRadius = 1.0f;
-        double thetaStep = 2 * Math.PI / divisionsU;
-        double phiStep = 2 * Math.PI / divisionsV;
+        double thetaStep = 2 * Math.PI / divisionsV;
+        double phiStep = 2 * Math.PI / divisionsU;
         double phase = -Math.PI / 2.0;
+        double textureStepU = 1.0f / (float) divisionsU;
+        double textureStepV = 1.0f / (float) divisionsV;
 
         // Calculate vertices: positions, uvs and normals
         for (int i = 0; i < divisionsU; i++) {
             for (int j = 0; j < divisionsV; j++) {
-                float xCoordinate = (float) ((majorRadius + minorRadius * Math.cos(j * thetaStep)) * (Math.cos(i * phiStep + phase)));
-                float zCoordinate = (float) ((majorRadius + minorRadius * Math.cos(j * thetaStep)) * (Math.sin(i * phiStep + phase)));
+                float xCoordinate = (float) ((majorRadius - minorRadius * Math.cos(j * thetaStep)) * (Math.cos(i * phiStep + phase)));
+                float zCoordinate = (float) ((majorRadius - minorRadius * Math.cos(j * thetaStep)) * (Math.sin(i * phiStep + phase)));
                 float yCoordinate = (float) (minorRadius * Math.sin(j * thetaStep));
                 outputMesh.positions.add((new Vector3(xCoordinate, yCoordinate, zCoordinate)));
+                outputMesh.normals.add(new Vector3((float) (-minorRadius * Math.cos(j * thetaStep) * Math.cos(i * phiStep + phase)),
+                        (float) (minorRadius * Math.sin(j * thetaStep)),
+                        (float) (-minorRadius * Math.cos(j * thetaStep) * Math.sin(i * phiStep + phase))));
+
             }
         }
-        outputMesh.normals.add((new Vector3(0.0f, 1.0f, 0.0f)));
+
+        for (int i = 0; i < divisionsU + 1; i++) {
+            for (int j = 0; j < divisionsV + 1; j++) {
+                    outputMesh.uvs.add(new Vector2((float)(1-i*textureStepU),(float)(1 - j*textureStepV)));
+            }
+        }
 
         // Calculate indices on faces (use OBJFace class)
         for (int i = 0; i < divisionsU; i++) {
             for (int j = 0; j < divisionsV; j++) {
+                int jj = j + 1;
+                int ii = i - 1;
+                int itop = i + 1;
+                if (j == divisionsV - 1) {
+                    jj = 0;
+                }
+                if (i == 0) {
+                    ii = divisionsU - 1;
+                }
+                if (i == divisionsU - 1) {
+                    itop = 0;
+                }
+                int sssi = i;
+                if (i == 0) {
+                    sssi = divisionsU ;
+                }
                 OBJFace topTriangle = new OBJFace(3, true, true);
-                /*
-                topTriangle.setVertex(0,,0,0);
-                topTriangle.setVertex(1,,0,0);
-                topTriangle.setVertex(2,,0,0);
-                */
+                topTriangle.setVertex(0, j + i * divisionsV, j + sssi * (divisionsV + 1), j + i * divisionsV);
+                topTriangle.setVertex(2, jj + ii * divisionsV, j + 1 + (i == 0 ? (divisionsU - 1) * (divisionsV + 1) : (i-1) * (divisionsV + 1)), jj + ii * divisionsV);
+                topTriangle.setVertex(1, jj + i * divisionsV, j + 1 + sssi * (divisionsV + 1), jj + i * divisionsV);
+                outputMesh.faces.add(topTriangle);
+                if (i == 0) {
+                    System.out.println("v1: " + String.valueOf(j + i * (divisionsV + 1)) + " v2: " + String.valueOf(j + 1 + (divisionsU - 1) * (divisionsV + 1) ) + " v 3: " + String.valueOf(j + 1 + i * (divisionsV + 1)));
+                }
+
+                OBJFace bottomTriangle = new OBJFace(3, true, true);
+                bottomTriangle.setVertex(0, j + i * divisionsV, j + i * (divisionsV + 1), j + i * divisionsV);
+                bottomTriangle.setVertex(1, j + itop * divisionsV, j + (i + 1) * (divisionsV + 1), j + itop * divisionsV);
+                bottomTriangle.setVertex(2, jj + i * divisionsV, j + 1 + i * (divisionsV + 1), jj + i * divisionsV);
+                outputMesh.faces.add(bottomTriangle);
 
             }
         }
