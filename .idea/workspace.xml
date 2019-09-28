@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5476166e-a01a-4569-bba9-ac44106af6be" name="Default Changelist" comment="" />
+    <list default="true" id="5476166e-a01a-4569-bba9-ac44106af6be" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/sphere_out.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mesh/src/meshgen/MeshGen.java" beforeDir="false" afterPath="$PROJECT_DIR$/mesh/src/meshgen/MeshGen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mesh/meshgen/MeshGen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mesh/meshgen/MeshGen.class" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
@@ -19,6 +27,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
   <component name="ProjectConfigurationFiles">
     <option name="files">
       <list>
@@ -26,6 +37,7 @@
       </list>
     </option>
   </component>
+  <component name="ProjectId" id="1RQzqSTcDs0XqV8fOwtJJ5rZ1N9" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -47,10 +59,10 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="MeshGen" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="meshgen.MeshGen" />
       <module name="mesh" />
-      <option name="PROGRAM_PARAMETERS" value="-g cylinder -n 32 -o cylinder_out.obj" />
+      <option name="PROGRAM_PARAMETERS" value="-c ./mesh/data/cylinder-reference.obj cylinder_out.obj " />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="meshgen.*" />
@@ -70,7 +82,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MeshGen" />
+        <item itemvalue="Application." />
       </list>
     </recent_temporary>
   </component>
@@ -86,6 +98,17 @@
       <updated>1569182684786</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

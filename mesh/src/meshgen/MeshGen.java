@@ -52,7 +52,7 @@ class MeshGen {
         outputMesh.normals.add((new Vector3(0, -1, 0))); // 1
 
         // Top surface
-        double phase = -Math.PI/2.0;
+        double phase = -Math.PI / 2.0;
         for (int i = 0; i < divisions; i++) {
             outputMesh.positions.add((new Vector3(radius * (float) Math.cos(i * step + phase), height / 2, radius * (float) Math.sin(i * step + phase))));
             outputMesh.normals.add((new Vector3((float) Math.cos(i * step + phase), 0, (float) Math.sin(i * step + phase))));
@@ -140,7 +140,7 @@ class MeshGen {
         outputMesh.normals.add((new Vector3(0.0f, 1.0f, 0.0f)));
         int count = 0;
         // Calculate Vertices (positions, uvs, and normals )
-        double phase = -Math.PI/2.0;
+        double phase = -Math.PI / 2.0;
         for (int i = 1; i < divisionsV; i++) {
             double phi = poleStep * i;
             for (int j = 0; j < divisionsU; j++) {
@@ -178,15 +178,15 @@ class MeshGen {
             for (int j = 1; j < divisionsU + 1; j++) {
                 //draw up triangle
                 OBJFace triangle = new OBJFace(3, true, true);
-                triangle.setVertex(0, Math.max(0, j == divisionsU ? 1 + (i - 1) * divisionsU : j + 1 + (i - 1) * divisionsU), (totalTextureNum - 1) - i*(divisionsU + 1) - j, Math.max(0, j == divisionsU ? 1 + (i - 1) * divisionsU : j + 1 + (i - 1) * divisionsU));
-                triangle.setVertex(1, j == divisionsU ? (1 + i * divisionsU) : j + i * divisionsU + 1, (totalTextureNum - 1) - (i + 1)*(divisionsU + 1) - j, j == divisionsU ? (1 + i * divisionsU) : j + i * divisionsU + 1);
-                triangle.setVertex(2, j + i * divisionsU, (totalTextureNum - 1) - (i + 1)*(divisionsU + 1) - (j - 1), j + i * divisionsU);
+                triangle.setVertex(0, Math.max(0, j == divisionsU ? 1 + (i - 1) * divisionsU : j + 1 + (i - 1) * divisionsU), (totalTextureNum - 1) - i * (divisionsU + 1) - j, Math.max(0, j == divisionsU ? 1 + (i - 1) * divisionsU : j + 1 + (i - 1) * divisionsU));
+                triangle.setVertex(1, j == divisionsU ? (1 + i * divisionsU) : j + i * divisionsU + 1, (totalTextureNum - 1) - (i + 1) * (divisionsU + 1) - j, j == divisionsU ? (1 + i * divisionsU) : j + i * divisionsU + 1);
+                triangle.setVertex(2, j + i * divisionsU, (totalTextureNum - 1) - (i + 1) * (divisionsU + 1) - (j - 1), j + i * divisionsU);
 
                 outputMesh.faces.add(triangle);
                 OBJFace triangleDown = new OBJFace(3, true, true);
-                triangleDown.setVertex(0, j + i * divisionsU, (totalTextureNum - 1) - (i + 1)*(divisionsU + 1) - (j - 1), j + i * divisionsU);
-                triangleDown.setVertex(1, j == divisionsU ? (1 + i * divisionsU) : j + i * divisionsU + 1, (totalTextureNum - 1) - (i + 1)*(divisionsU + 1) - j, j == divisionsU ? (1 + i * divisionsU) : j + i * divisionsU + 1);
-                triangleDown.setVertex(2, Math.min((divisionsV - 1) * divisionsU + 1, j + (i + 1) * divisionsU), (totalTextureNum - 1) - (i + 2)*(divisionsU + 1) - (j-1), Math.min((divisionsV - 1) * divisionsU + 1, j + (i + 1) * divisionsU));
+                triangleDown.setVertex(0, j + i * divisionsU, (totalTextureNum - 1) - (i + 1) * (divisionsU + 1) - (j - 1), j + i * divisionsU);
+                triangleDown.setVertex(1, j == divisionsU ? (1 + i * divisionsU) : j + i * divisionsU + 1, (totalTextureNum - 1) - (i + 1) * (divisionsU + 1) - j, j == divisionsU ? (1 + i * divisionsU) : j + i * divisionsU + 1);
+                triangleDown.setVertex(2, Math.min((divisionsV - 1) * divisionsU + 1, j + (i + 1) * divisionsU), (totalTextureNum - 1) - (i + 2) * (divisionsU + 1) - (j - 1), Math.min((divisionsV - 1) * divisionsU + 1, j + (i + 1) * divisionsU));
                 outputMesh.faces.add(triangleDown);
             }
         }
@@ -227,9 +227,9 @@ class MeshGen {
             Vector3 line1 = a.clone().sub(b.clone());
             Vector3 line2 = a.clone().sub(c.clone());
             Vector3 direction = line1.cross(line2).normalize();
-            outputMesh.normals.set(face.positions[0],outputMesh.normals.get(face.positions[0]).clone().add(direction.clone()));
-            outputMesh.normals.set(face.positions[1],outputMesh.normals.get(face.positions[1]).clone().add(direction.clone()));
-            outputMesh.normals.set(face.positions[2],outputMesh.normals.get(face.positions[2]).clone().add(direction.clone()));
+            outputMesh.normals.set(face.positions[0], outputMesh.normals.get(face.positions[0]).clone().add(direction.clone()));
+            outputMesh.normals.set(face.positions[1], outputMesh.normals.get(face.positions[1]).clone().add(direction.clone()));
+            outputMesh.normals.set(face.positions[2], outputMesh.normals.get(face.positions[2]).clone().add(direction.clone()));
         }
         for (int i = 0; i < outputMesh.normals.size(); i++) {
             Vector3 tempNorm = outputMesh.normals.get(i).clone();
@@ -238,7 +238,7 @@ class MeshGen {
         // Initialize output faces
         // Calculate face normals, distribute to adjacent vertices
         // Normalize new normals
-        for (OBJFace face: outputMesh.faces) {
+        for (OBJFace face : outputMesh.faces) {
             face.normals = face.positions.clone();
         }
 
@@ -268,8 +268,35 @@ class MeshGen {
 
         // Extra Credit: Generate Turos (10pt)
         // TODO:
+        float majorRadius = 1.0f;
+        double thetaStep = 2 * Math.PI / divisionsU;
+        double phiStep = 2 * Math.PI / divisionsV;
+        double phase = -Math.PI / 2.0;
+
         // Calculate vertices: positions, uvs and normals
+        for (int i = 0; i < divisionsU; i++) {
+            for (int j = 0; j < divisionsV; j++) {
+                float xCoordinate = (float) ((majorRadius + minorRadius * Math.cos(j * thetaStep)) * (Math.cos(i * phiStep + phase)));
+                float zCoordinate = (float) ((majorRadius + minorRadius * Math.cos(j * thetaStep)) * (Math.sin(i * phiStep + phase)));
+                float yCoordinate = (float) (minorRadius * Math.sin(j * thetaStep));
+                outputMesh.positions.add((new Vector3(xCoordinate, yCoordinate, zCoordinate)));
+            }
+        }
+        outputMesh.normals.add((new Vector3(0.0f, 1.0f, 0.0f)));
+
         // Calculate indices on faces (use OBJFace class)
+        for (int i = 0; i < divisionsU; i++) {
+            for (int j = 0; j < divisionsV; j++) {
+                OBJFace topTriangle = new OBJFace(3, true, true);
+                /*
+                topTriangle.setVertex(0,,0,0);
+                topTriangle.setVertex(1,,0,0);
+                topTriangle.setVertex(2,,0,0);
+                */
+
+            }
+        }
+
 
         return outputMesh;
     }
