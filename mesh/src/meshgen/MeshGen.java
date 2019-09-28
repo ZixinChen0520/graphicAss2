@@ -69,11 +69,11 @@ class MeshGen {
         // Top & Bottom texture
         for (int j = 0; j < divisions; j++) {
             int i = (j + topBottomTextureRotationFactor) < divisions ? (j + topBottomTextureRotationFactor) : (j + topBottomTextureRotationFactor) - divisions;
-            outputMesh.uvs.add((new Vector2((float) Math.cos(-i * step) * 0.25f + 0.75f, (float) Math.sin(-i * step) * 0.25f + 0.75f)));
+            outputMesh.uvs.add((new Vector2((float) Math.cos(i * step + phase) * 0.25f + 0.75f, (float) -Math.sin(i * step + phase) * 0.25f + 0.75f)));
         }
         for (int j = 0; j < divisions; j++) {
             int i = (j + topBottomTextureRotationFactor) < divisions ? (j + topBottomTextureRotationFactor) : (j + topBottomTextureRotationFactor) - divisions;
-            outputMesh.uvs.add((new Vector2((float) Math.cos(-i * step) * 0.25f + 0.25f, (float) Math.sin(-i * step) * 0.25f + 0.75f)));
+            outputMesh.uvs.add((new Vector2((float) -Math.cos(i * step - phase ) * 0.25f + 0.25f, (float) -Math.sin(i * step - phase) * 0.25f + 0.75f)));
         }
         outputMesh.uvs.add((new Vector2(0.75f, 0.75f)));
         outputMesh.uvs.add((new Vector2(0.25f, 0.75f)));
